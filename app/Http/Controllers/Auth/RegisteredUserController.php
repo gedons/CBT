@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Models\Mode;
+use App\Models\Level;
+use App\Models\Department;
+use App\Notifications\NewUserNotification;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +24,10 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $modes = Mode::all();
+        $levels = Level::all();
+        $departments = Department::all();
+        return view('auth.register', compact('modes','levels','departments'));
     }
 
     /**
@@ -33,6 +40,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -42,10 +50,15 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'mode_id' => $request->mode_id,
+            'level_id' => $request->level_id,
+            'department_id' => $request->department_id,
             'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
+
+       // auth()->user()->notify(new NewUserNotification());
 
         Auth::login($user);
 

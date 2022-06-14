@@ -69,12 +69,12 @@
                   <div class="d-flex">
                     <div class="d-flex">
                       <div class="me-4">
-                        <p class="text-white text-sm opacity-8 mb-0">Sponsored Posts</p>
+                        <p class="text-white text-sm opacity-8 mb-0">Available Exams</p>
                         <h6 class="text-white mb-0">5</h6>
                       </div>
                       <div>
-                        <p class="text-white text-sm opacity-8 mb-0">Users Online</p>
-                        <h6 class="text-white mb-0">{{$user->count()}}</h6>
+                        <p class="text-white text-sm opacity-8 mb-0">Students Online</p>
+                        <h6 class="text-white mb-0">{{$users->count()}}</h6>
                       </div>
                     </div>
                    
@@ -93,10 +93,10 @@
                     </div>
                   </div>
                   <div class="card-body pt-0 p-3 text-center">
-                    <h6 class="text-center mb-0">Users</h6>
+                    <h6 class="text-center mb-0">Students</h6>
                     <span class="text-xs">Active Available</span>
                     <hr class="horizontal dark my-3">
-                    <h5 class="mb-0">{{$user->count()}}</h5>
+                    <h5 class="mb-0">{{$users->count()}}</h5>
                   </div>
                 </div>
               </div>
@@ -170,7 +170,7 @@
                 <thead>
                   <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mode of Study</th>
                    
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created</th>
                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
@@ -178,28 +178,29 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  @foreach ($users as $user)
+                       <tr>
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div>
-                          <img src="{{ asset('images/admin_images/team-2.jpg')}}" class="avatar avatar-sm me-3">
+                          <img src="{{ asset('images/img.png')}}" class="avatar avatar-sm me-3">
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">John Michael</h6>
-                          <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                          <h6 class="mb-0 text-sm">{{$user->name}}</h6>
+                          <p class="text-xs text-secondary mb-0">{{$user->email}}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <p class="text-xs font-weight-bold mb-0">Unverified</p>
+                      <p class="text-xs font-weight-bold mb-0">{{$user->mode->name}}</p>
                       
                     </td>
                    
                     <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                      <span class="text-secondary text-xs font-weight-bold">{{$user->created_at->diffForHumans()}}</span>
                     </td>
                      <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-success">Online</span>
+                      <span class="badge badge-sm bg-gradient-success">Active</span>
                     </td>
                     <td class="align-middle">
                       <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
@@ -207,6 +208,8 @@
                       </a>
                     </td>
                   </tr>
+                  @endforeach
+                 
                 </tbody>
               </table>
             </div>

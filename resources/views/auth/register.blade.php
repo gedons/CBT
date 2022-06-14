@@ -26,6 +26,55 @@
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
+             <!-- Mode -->
+             <div class="mt-4">
+                <x-label for="mode" :value="__('Mode of Study')" />
+
+                <select name="mode_id" class="block mt-1 w-full" aria-label="Default select example">
+
+                    <option selected>Select</option> 
+                    @foreach ($modes as $mode)
+                        <option value="{{$mode->id}}">
+                          {{$mode->name}}
+                       </option>
+                    @endforeach
+                        
+                    
+                 </select>
+            </div>
+
+             <!-- Level -->
+             <div class="mt-4">
+                <x-label for="level" :value="__('Level')" />
+
+                <select name="level_id" class="block mt-1 w-full" aria-label="Default select example">
+
+                    <option selected>Select</option> 
+                        @foreach ($levels as $level)
+                            <option value="{{$level->id}}">
+                            {{$level->name}}
+                        </option>
+                        @endforeach
+                    
+                 </select>
+            </div>
+
+             <!-- Department -->
+             <div class="mt-4">
+                <x-label for="department" :value="__('Department')" />
+
+                <select name="department_id" class="block mt-1 w-full" aria-label="Default select example">
+
+                    <option selected>Select</option> 
+                        @foreach ($departments as $department)
+                            <option value="{{$department->id}}">
+                            {{$department->name}}
+                        </option>
+                        @endforeach
+                    
+                 </select>
+            </div>
+
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />
