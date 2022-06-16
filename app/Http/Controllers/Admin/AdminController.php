@@ -10,6 +10,7 @@ use App\Models\Department;
 use App\Models\Level;
 use App\Models\Course;
 use App\Models\Exam;
+use App\Models\Question;
 use Auth;
 
 class AdminController extends Controller
@@ -69,12 +70,35 @@ class AdminController extends Controller
     public function cbt()
     {     
         $exams = Exam::get();
+        $questions = Question::get();
+        // $questionCount = count($questions);
         return view('admin.actions.cbt', compact('exams'));
     }
 
-    public function profiles()
+    public function examstart(Request $request)
     {
-     
+        if ($request->ajax()) 
+        {
+            $data = $request->all();
+
+             if ($data['status']=="Active") {
+                $status = 0;
+             }else{
+                $status = 1;
+             }
+              Exam::where('id',$data['exam_id'])->update(['status'=>$status]);
+              return response()->json(['status'=>$status,'exam_id'=>$data['exam_id']]);
+        }
+    }
+
+    public function question()
+    {     
+        $questions = Question::get();
+        return view('admin.actions.question', compact('questions'));
+    }
+
+    public function profiles()
+    {    
         return view('admin.actions.profiles');
     }
 

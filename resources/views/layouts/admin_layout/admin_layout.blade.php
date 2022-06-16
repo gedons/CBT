@@ -37,6 +37,7 @@
   <script src="{{ asset('js/admin_js/plugins/smooth-scrollbar.min.js') }}"></script>
   <script src="{{ asset('js/admin_js/plugins/chartjs.min.js') }}"></script>
   <script src="{{ asset('js/admin_js/plugins/Chart.extension.js') }}"></script>
+  <script src="{{ asset('js/admin_js/plugins/ascript.js') }}"></script>
   <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 

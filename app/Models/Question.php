@@ -10,6 +10,16 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'exam_id',
+        'question',
+        'option_a',
+        'option_b',
+        'option_c',
+        'option_d',
+        'answer',
+    ];
+
     /**
      * Get the exam that owns the Question
      *

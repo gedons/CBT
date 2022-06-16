@@ -21,7 +21,15 @@ class CreateExamsTable extends Migration
             $table->unsignedBigInteger('course_id');
             $table->unsignedTinyInteger('exam_hours');
             $table->unsignedTinyInteger('exam_minutes');
-            $table->boolean('started')->default(1);
+            $table->unsignedBigInteger('mode_id');
+            $table->unsignedBigInteger('level_id');
+            $table->unsignedBigInteger('department_id');
+
+            $table->index('mode_id');
+            $table->index('level_id');
+            $table->index('department_id');
+            $table->index('course_id');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

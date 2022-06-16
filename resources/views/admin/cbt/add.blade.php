@@ -88,6 +88,49 @@
                              </select>
                         </div>
 
+                        
+                        <div class="row">
+                          <center><label for="course" class="col-form-label">Select Mode</label></center>
+                          <select name="mode_id" class="col-form-label" aria-label="select">
+
+                              <option selected>Select</option> 
+                                  @foreach ($modes as $mode)
+                                      <option value="{{$mode->id}}">
+                                      {{$mode->name}}
+                                  </option>
+                                  @endforeach
+                              
+                           </select>
+                      </div>
+
+                      <div class="row">
+                        <center><label for="course" class="col-form-label">Select Level</label></center>
+                        <select name="level_id" class="col-form-label" aria-label="select">
+
+                            <option selected>Select</option> 
+                                @foreach ($levels as $level)
+                                    <option value="{{$level->id}}">
+                                    {{$level->name}}
+                                </option>
+                                @endforeach
+                            
+                         </select>
+                    </div>
+
+                    <div class="row">
+                      <center><label for="course" class="col-form-label">Select Department</label></center>
+                      <select name="department_id" class="col-form-label" aria-label="select">
+
+                          <option selected>Select</option> 
+                              @foreach ($departments as $department)
+                                  <option value="{{$department->id}}">
+                                  {{$department->name}}
+                              </option>
+                              @endforeach
+                          
+                       </select>
+                  </div>
+
                         <div class="row">
                             <center><label for="exam_date" class="col-form-label">Date</label></center>
                             <input id="exam_date" type="date" name="exam_date" class="form-control @error('exam_date') is-invalid @enderror" autocomplete="exam_date" autofocus>

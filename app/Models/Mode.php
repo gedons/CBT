@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Level;
+use App\Models\Exam;
 
 class Mode extends Model
 {
@@ -23,5 +24,10 @@ class Mode extends Model
     public function levels()
     {
         return $this->hasMany(Level::class);   
+    }
+
+    public function exam()
+    {
+        return $this->hasOne(Exam::class);   
     }
 }

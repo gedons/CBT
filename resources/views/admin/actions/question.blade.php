@@ -6,7 +6,7 @@
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="false">
     <div class="container-fluid py-1 px-3">
       <nav aria-label="breadcrumb">
-        <h6 class="font-weight-bolder mb-0">CBT</h6>
+        <h6 class="font-weight-bolder mb-0">Add CBT Question</h6>
       </nav>
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -63,7 +63,7 @@
                 @if (session()->has('message'))
                 <div class="alert alert-success">{{session('message')}}</div>
                 @endif
-                <a href="{{ route('cbt.add')}}">
+                <a href="{{ route('question.add')}}">
                 <button class="btn btn-outline-primary btn-sm mb-0" style="float: right">Add New</button>
                 </a>
             </div>
@@ -72,24 +72,22 @@
                 <table class="table align-items-center mb-0">
                     <thead>
                       <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CBT Name</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">CBT Course</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CBT Name -- Course</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">CBT Question</th>
                         
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Time</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Answer</th>
+                        {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Time</th>
                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Started</th>
-                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created</th>
+                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created</th> --}}
                         <th class="text-secondary opacity-7"></th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($exams as $exam)
+                      @foreach ($questions as $question)
                            <tr>
                         <td>
                           <div class="d-flex px-2 py-1">
-                            <div>
-                              <p class="text-xs font-weight-bold mb-0">{{$exam->exam}}</p> 
-                            </div>
+                            <p class="text-xs font-weight-bold mb-0">{{$question->exam->exam}} -- {{$question->exam->course->course}}</p>
                             <div class="d-flex flex-column justify-content-center">
                               <h6 class="mb-0 text-sm"></h6>
                               <p class="text-xs text-secondary mb-0"></p>
@@ -97,48 +95,32 @@
                           </div>
                         </td>
                         <td>
-                          <p class="text-xs font-weight-bold mb-0">{{$exam->course->course}}</p>          
+                          <p class="text-xs font-weight-bold mb-0">{{$question->question}}</p>          
                         </td>
                         
                        
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold">{{$exam->exam_date}}</span>
+                          <span class="text-secondary text-xs font-weight-bold">{{$question->answer}}</span>
                         </td>
-                        <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">{{$exam->exam_time}}</span>
-                        </td>
-                         <td class="align-middle text-center text-sm">
-                          @if ($exam->status == 1)
-                              <a href="javascript:;" class="examstart" id="exam-{{$exam->id}}" exam_id="{{$exam->id}}" data-toggle="tooltip" data-original-title="Edit user">
-                            <i style="color: green;" class="fas fa-toggle-on" aria-hidden="true" status="Active">Active</i>
-                          </a>
-                          @else
-                            <a href="javascript:;" class="examstart" id="exam-{{$exam->id}}" exam_id="{{$exam->id}}" data-toggle="tooltip" data-original-title="Edit user">
-                              <i style="color: red;" class="fas fa-toggle-on" aria-hidden="true" status="Inactive">Inactive</i>
-                            </a>
-                          @endif
-                          
+                        {{-- <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold">sdjknbvjsd</span>
+                        </td> --}}
+                         {{-- <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-danger">No</span>
                         </td>
                         <td class="align-middle text-center">
                             <p class="text-xs font-weight-bold mb-0">{{$exam->created_at->diffForHumans()}}</p>          
-                          </td>
+                          </td> --}}
                         <td class="align-middle">
                           <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                             View
                           </a>
                         </td>
-                        {{-- <td class="align-middle">
-                          @if ($questionCount > 0)
-                            <a href="{{route('admin.question')}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                              <span class="badge badge-sm bg-gradient-success">{{$questionCount}} Question Available</span>
-                            </a>
-                          @else
-                              <a href="{{route('admin.question')}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                              <span class="badge badge-sm bg-gradient-danger">Add Question</span>
-                            </a>
-                          @endif
-                          
-                        </td> --}}
+                        <td class="align-middle">
+                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                Edit
+                              </a>
+                        </td>
                       </tr>
                       @endforeach
                      

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Course;
 use App\Models\Question;
+use App\Models\Mode;
+use App\Models\Level;
+use App\Models\Department;
 
 class Exam extends Model
 {
@@ -18,7 +21,10 @@ class Exam extends Model
         'course_id',
         'exam_hours',
         'exam_minutes',
-        'started',
+        'status',
+        'mode_id',
+        'level_id',
+        'department_id'
     ];
 
 
@@ -26,6 +32,21 @@ class Exam extends Model
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function mode()
+    {
+        return $this->belongsTo(Mode::class);
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 
     /**

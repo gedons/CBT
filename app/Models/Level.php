@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Mode;
 use App\Models\Department;
 use App\Models\User;
+use App\Models\Exam;
 
 class Level extends Model
 {
@@ -29,5 +30,10 @@ class Level extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function exam()
+    {
+        return $this->hasOne(Exam::class);   
     }
 }

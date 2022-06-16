@@ -40,6 +40,8 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
         Route::get('course', [AdminController::class, 'course'])->name('admin.course');
         Route::get('department', [AdminController::class, 'department'])->name('admin.department');
         Route::get('cbt', [AdminController::class, 'cbt'])->name('admin.cbt');
+        Route::get('cbt/question', [AdminController::class, 'question'])->name('admin.question');
+        Route::post('cbt/examstart', [AdminController::class, 'examstart'])->name('cbt.examstart');
         Route::get('profiles', [AdminController::class, 'profiles'])->name('admin.profiles');
 
 
@@ -62,9 +64,11 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
         //exam
         Route::get('cbt/add', [ExamController::class, 'add'])->name('cbt.add');
         Route::post('cbt/save', [ExamController::class, 'save'])->name('cbt.save');
+       
 
         //question
         Route::get('cbt/question/add', [QuestionController::class, 'add'])->name('question.add');
+        Route::post('cbt/question/save', [QuestionController::class, 'save'])->name('question.save');
 
 	});
 
@@ -73,5 +77,13 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+//exams
+Route::get('{any}', function() {
+    return view('exam');
+})->where('any', '.*');
+
+
+
 
 require __DIR__.'/auth.php';
